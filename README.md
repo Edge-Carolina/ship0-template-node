@@ -22,7 +22,58 @@ The `<script type="module">` tag lets you `import` from files like `import { add
 
 ---
 
+## Get the code (fork or template)
+
+**Pick one (don’t do both). Your repo must be named exactly:**  
+`edge-f25-ship0-<onyen-or-last-first>`
+
+### A) Use this template (preferred)
+1. Open the Ship 0 Node template in the Edge Carolina org.
+2. Click **Use this template** → **Create a new repository**.
+3. **Owner:** your personal GitHub account  
+   **Name:** `edge-f25-ship0-<onyen-or-last-first>`  
+   **Visibility:** Public (or grant org read access).
+4. Click **Create repository**.
+5. Clone it locally:
+
+   ```bash
+   # HTTPS
+   git clone https://github.com/<you>/edge-f25-ship0-<onyen-or-last-first>.git
+   cd edge-f25-ship0-<onyen-or-last-first>
+
+   # Or SSH (if you use SSH keys)
+   git clone git@github.com:<you>/edge-f25-ship0-<onyen-or-last-first>.git
+   ```
+
+### B) Fork (also fine)
+1. Open the Ship 0 Node template in the Edge Carolina org.
+2. Click **Fork**.
+3. **Owner:** your personal GitHub account.
+4. **Repository name:** change to `edge-f25-ship0-<onyen-or-last-first>`.
+5. Click **Create fork**.
+6. Clone it locally (same commands as above).
+
+### After cloning
+- **Baseline:** no install needed. Just open `index.html` (see below).
+- **Hard Mode:** create a file named `HARDMODE` at repo root (enables tests/CI) and run:
+
+  ```bash
+  npm install --no-audit --no-fund
+  npm test
+  ```
+
+- **Commit & push (both paths):**
+
+  ```bash
+  git add -A
+  git commit -m "Ship 0: baseline work"
+  git push -u origin main
+  ```
+
+---
+
 ## Baseline (Required) — LocalStorage Ship Log
+
 Build a tiny app where you can add entries and see them persist after a page refresh.
 
 **Files you’ll touch**
@@ -32,15 +83,15 @@ Build a tiny app where you can add entries and see them persist after a page ref
 - `src/logic.js` — pure functions; only `add` is used by Baseline
 
 **Run it (no install needed)**
-1) Open `index.html` (double-click) — or from a terminal:
+1. Open `index.html` (double-click) — or from a terminal:
    - macOS: `open index.html`
    - Linux: `xdg-open index.html`
    - Windows: `start index.html`
-2) Type an entry → **Add Entry** → refresh the page; your entries should remain.
+2. Type an entry → **Add Entry** → refresh the page; your entries should remain.
 
 **Pass (Baseline) if all true**
 - Add entries and they **persist** after refresh.
-- Entries render newest‑first.
+- Entries render newest-first.
 - Screenshot saved at `public/screenshot.png` (or embed in README).
 - **≥2 commits** with meaningful messages.
 - Repo name: `edge-f25-ship0-<onyen-or-last-first>`.
@@ -51,23 +102,26 @@ Paste your screenshot path or link here:
 ---
 
 ## Hard Mode (Optional, Scored) — Structure + Tests
+
 Implement real features with testable logic. You’ll write **pure functions** in `src/logic.js` and (optionally) wire UI in `src/app.js`.
 
 **Features to implement (logic first)**
 - **Delete**: remove an entry by its timestamp `t`.
-- **Edit**: update an entry’s text (must be trimmed and non‑empty).
-- **Filter**: return entries that include a query substring (case‑insensitive).
+- **Edit**: update an entry’s text (must be trimmed and non-empty).
+- **Filter**: return entries that include a query substring (case-insensitive).
 
 **Tests**
 - We use **Vitest** (a fast test runner). Tests live in `tests/logic.test.js`.
 - Run tests:
+
   ```bash
   npm install --no-audit --no-fund
   npm test
   ```
+
 - You pass if tests are **green** locally and on CI.
 
-**Opt‑in CI for Hard Mode**
+**Opt-in CI for Hard Mode**
 - Create an empty file named **`HARDMODE`** at the repo root when you’re ready.
 - Our GitHub Action will then run `npm install` and `npm test`. No `HARDMODE` file = Baseline checks only.
 
@@ -87,7 +141,7 @@ Implement real features with testable logic. You’ll write **pure functions** i
 ---
 
 ## Troubleshooting
-- If the page won't open with double‑click, serve it with any static server:
+- If the page won't open with double-click, serve it with any static server:
   ```bash
   npx http-server .
   ```
