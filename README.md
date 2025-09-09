@@ -87,12 +87,16 @@ Implement real features with testable logic. You’ll write **pure functions** i
 ---
 
 ## Troubleshooting
-- If the page won’t open with double‑click, serve it with any static server:
+- If the page won't open with double‑click, serve it with any static server:
   ```bash
   npx http-server .
   ```
-- If `npm test` fails with “module not found,” ensure you ran `npm install` in the repo folder.
+- If `npm test` fails with "module not found," ensure you ran `npm install` in the repo folder.
 - If your tests hang, run `npm test -- --reporter=verbose`.
+- If `npm test` fails with PostCSS/Tailwind errors, try running tests in a clean directory or use:
+  ```bash
+  npx vitest run --config /dev/null
+  ```
 
 ---
 
