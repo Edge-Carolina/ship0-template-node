@@ -106,3 +106,5 @@ Implement real features with testable logic. You’ll write **pure functions** i
 - Minutes spent + biggest blocker
 - Difficulty rating (1–5)
 - AI attestation per the form
+
+Submit [here](https://forms.gle/5eHpZjkAZJcH4ipf7)
