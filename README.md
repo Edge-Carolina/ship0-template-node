@@ -132,7 +132,12 @@ Build a tiny app that lets you add entries and see them persist after a refresh.
 
 **Run it (no install needed)**
 
-1. Open `index.html` (double-click or use the OS command).
+1. **IMPORTANT**: Due to ES modules, you must use a web server (not file:// protocol):
+   ```bash
+   npx http-server . -p 8080
+   ```
+   Then open http://localhost:8080
+   
 2. Type an entry → **Add Entry**.
 3. Refresh the page. Your entries should still be there (same origin).
 4. Verify newest-first ordering.
@@ -252,7 +257,13 @@ Submit here: **[https://forms.gle/5eHpZjkAZJcH4ipf7](https://forms.gle/5eHpZjkAZ
 
 ## Troubleshooting (extra)
 
-* If the page won’t open with double-click, serve it:
+* **CORS Error**: If you see "Access to script... has been blocked by CORS policy", you MUST use a web server. ES modules don't work with `file://` protocol:
+  ```bash
+  npx http-server . -p 8080
+  ```
+  Then open http://localhost:8080 (not the file directly)
+
+* If the page won't open with double-click, serve it:
 
   ```bash
   npx http-server .
