@@ -2,8 +2,7 @@
 
 Two tracks in one repo: a gentle **Baseline** that runs in any browser, and an optional **Hard Mode** with real logic + tests.
 
-**Repo name (required):** `edge-f25-ship0-<onyen-or-last-first>`
-**Visibility:** Public (or grant org read access).
+**Branch name (required):** `<firstname-lastname>`
 **Commits:** ≥ 2 with meaningful messages (no giant dump).
 
 ---
@@ -17,18 +16,74 @@ Two tracks in one repo: a gentle **Baseline** that runs in any browser, and an o
 
 ---
 
+## Get the code
+
+You’ll work directly from the shared repository. Don’t fork or template. 
+
+1. Clone the starter repo:
+
+   ```bash
+   git clone https://github.com/Edge-Carolina/ship0-template-node.git
+   cd ship0-template-node
+   ```
+      
+  or use the built in "Clone a Github Repo" on a newly opened window.
+  
+2. Create a new branch named with your first and last name (lowercase, dash separated):
+
+   ```bash
+   git checkout -b <firstname-lastname>
+   ```
+
+   Example:
+
+   ```bash
+   git checkout -b weston-voglesonger
+   ```
+
+3. Verify your branch:
+
+   ```bash
+   git branch
+   ```
+
+---
+
+## Working on your branch
+
+As you make changes:
+
+```bash
+# Stage your changes
+git add -A
+
+# Commit with a clear message
+git commit -m "Ship 0: baseline work"
+
+# Push your branch to GitHub
+git push -u origin <firstname-lastname>
+```
+
+All of your work for Ship 0 should be done **only** on your `<firstname-lastname>` branch. Do not commit to `main`.
+
+---
+
 ## What is Node? What is npm?
 
 * **Node** runs JavaScript outside the browser (we use it here for tooling and tests). Check: `node -v`
 * **npm** is Node’s package manager. Check: `npm -v`
 * You don’t need a bundler here. The app uses a single `index.html` and `<script type="module">` to load `src/app.js` directly.
 
+---
+
 ## What is `localStorage`?
 
 `localStorage` is a simple key–value store built into the browser and scoped to an **origin** (protocol + host + port).
 We save entries to the key `edge_ship_log`. Refreshing the page reads the same key and re-renders your entries.
 
-> It **persists across refreshes and restarts** as long as you stay on the same origin (e.g., always `http://localhost:PORT`).
+It **persists across refreshes and restarts** as long as you stay on the same origin (e.g., always `http://localhost:PORT`).
+
+---
 
 ## ES Modules in the browser
 
@@ -39,54 +94,6 @@ import { add } from "./logic.js";
 ```
 
 This works in current browsers without extra tooling.
-
----
-
-## Get the code (fork or template)
-
-Your repo **must** be named exactly:
-`edge-f25-ship0-<onyen-or-last-first>`
-
-### A) Use this template (preferred)
-
-1. Open the Ship 0 Node template in the Edge Carolina org.
-2. **Use this template** → **Create a new repository**.
-3. **Owner:** your personal GitHub account
-   **Name:** `edge-f25-ship0-<onyen-or-last-first>`
-   **Visibility:** Public (or grant org read access)
-4. Create the repository, then clone it:
-
-   ```bash
-   # HTTPS
-   git clone https://github.com/<you>/edge-f25-ship0-<onyen-or-last-first>.git
-   cd edge-f25-ship0-<onyen-or-last-first>
-
-   # Or SSH
-   git clone git@github.com:<you>/edge-f25-ship0-<onyen-or-last-first>.git
-   ```
-
-### B) Fork (also fine)
-
-1. Fork the template to your personal GitHub.
-2. Rename the fork to `edge-f25-ship0-<onyen-or-last-first>`.
-3. Clone it (commands above).
-
-### After cloning
-
-* **Baseline:** no install needed. Just open `index.html` (details below).
-* **Hard Mode:** create a file named `HARDMODE` at repo root to turn on CI, then:
-
-  ```bash
-  npm install --no-audit --no-fund
-  npm test
-  ```
-* **Commit & push (both paths):**
-
-  ```bash
-  git add -A
-  git commit -m "Ship 0: baseline work"
-  git push -u origin main
-  ```
 
 ---
 
@@ -107,18 +114,6 @@ npx http-server .          # then visit the printed http://localhost:XXXX
 
 ---
 
-## Browser Origin & localStorage (read this)
-
-* `localStorage` **persists** across refreshes and restarts on the **same origin**.
-* `file://` is a different origin than `http://localhost`. If you switch, you’ll see different data.
-* Some browsers block ES module imports from `file://`. If you get **“Failed to load module script”**, serve with `npx http-server .`.
-* Private/Incognito windows use separate storage and may wipe on close.
-
-**Reset app data:** DevTools → Application/Storage → Local Storage → delete `edge_ship_log`,
-or run `localStorage.clear()` in the console.
-
----
-
 ## Baseline (Required) — LocalStorage Ship Log
 
 Build a tiny app that lets you add entries and see them persist after a refresh.
@@ -130,16 +125,20 @@ Build a tiny app that lets you add entries and see them persist after a refresh.
 * `src/storage.js` — tiny wrapper over `localStorage`
 * `src/logic.js` — pure functions; only `add` is used by Baseline
 
-**Run it (no install needed)**
+**Run it**
 
-1. **IMPORTANT**: Due to ES modules, you must use a web server (not file:// protocol):
+1. Serve the repo locally (not `file://`):
+
    ```bash
    npx http-server . -p 8080
    ```
-   Then open http://localhost:8080
-   
+
+   Then open [http://localhost:8080](http://localhost:8080)
+
 2. Type an entry → **Add Entry**.
+
 3. Refresh the page. Your entries should still be there (same origin).
+
 4. Verify newest-first ordering.
 
 **Pass (Baseline) if all true**
@@ -147,8 +146,8 @@ Build a tiny app that lets you add entries and see them persist after a refresh.
 * You can add entries and they **persist** after refresh.
 * Entries render **newest-first**.
 * `public/screenshot.png` exists (or embed a screenshot in README).
-* Repo name matches: `edge-f25-ship0-<onyen-or-last-first>`.
-* **≥ 2 commits** with meaningful messages.
+* Work lives on your `<firstname-lastname>` branch.
+* ≥ 2 commits with meaningful messages.
 
 ---
 
@@ -194,7 +193,7 @@ Implement real features with testable logic. Write **pure functions** in `src/lo
 * Add → refresh → entries persist (same origin).
 * Newest entry renders first.
 * `public/screenshot.png` exists (or screenshot embedded in README).
-* Correct repo name; ≥ 2 meaningful commits.
+* Correct branch name; ≥ 2 meaningful commits.
 
 **Hard Mode (if opted in)**
 
@@ -206,29 +205,18 @@ Implement real features with testable logic. Write **pure functions** in `src/lo
 
 ## Common Pitfalls & Fixes
 
-* **“Failed to load module script” / CORS** when double-clicking `index.html`
-  → Serve locally: `npx http-server .` and use the provided `http://localhost:…`
-* **Different data after refresh**
-  → You changed origin (`file://` vs `http://localhost`). Stick to one.
-* **Tests fail with “module not found”**
-  → Run `npm install` **in this repo**; then `npm test`.
-* **Nothing renders**
-  → DevTools → Console. If `JSON.parse` errors or `null`, your storage is empty/corrupt. Clear it and try again.
-
----
-
-## Node & Tooling
-
-* Repo pins Node in `.nvmrc`. Use `nvm use` if you have it.
-* If you don’t use nvm, install **Node 20.x LTS**.
-* `npm install --no-audit --no-fund` is **only** required for Hard Mode/tests.
+* **“Failed to load module script” / CORS** → Serve locally:
+  `npx http-server .` and use the provided `http://localhost:…`
+* **Different data after refresh** → You changed origin (`file://` vs `http://localhost`). Stick to one.
+* **Tests fail with “module not found”** → Run `npm install` **in this repo**, then `npm test`.
+* **Nothing renders** → DevTools → Console. If `JSON.parse` errors or `null`, your storage is empty/corrupt. Clear it and try again.
 
 ---
 
 ## Screenshot Evidence
 
 * Save a screenshot at `public/screenshot.png` (or embed in the README).
-* Show **≥ 2 entries** on screen.
+* Show ≥ 2 entries on screen.
 * If using a local server, the URL bar should show `http://localhost:…` so TAs know you weren’t on a blocked `file://` origin.
 
 ---
@@ -243,38 +231,3 @@ Implement real features with testable logic. Write **pure functions** in `src/lo
 * (Hard Mode) confirm CI is green
 
 Submit here: **[https://forms.gle/5eHpZjkAZJcH4ipf7](https://forms.gle/5eHpZjkAZJcH4ipf7)**
-
----
-
-## Conceptual checkpoints (for yourself)
-
-* What’s the difference between **DOM code** and **pure functions**?
-* Why is **localStorage** good enough here, and when would you need a backend?
-* How does `type="module"` change imports in the browser?
-* Why test logic **without** a browser?
-
----
-
-## Troubleshooting (extra)
-
-* **CORS Error**: If you see "Access to script... has been blocked by CORS policy", you MUST use a web server. ES modules don't work with `file://` protocol:
-  ```bash
-  npx http-server . -p 8080
-  ```
-  Then open http://localhost:8080 (not the file directly)
-
-* If the page won't open with double-click, serve it:
-
-  ```bash
-  npx http-server .
-  ```
-* If tests hang, try:
-
-  ```bash
-  npm test -- --reporter=verbose
-  ```
-* If some global tools (Tailwind, PostCSS, etc.) leak into tests, run:
-
-  ```bash
-  npx vitest run --config /dev/null
-  ```
